@@ -548,6 +548,62 @@ nmap <silent> <s-tab> :bp!<CR>
 nnoremap <unique> <Leader>bd :call exUtility#Kwbd(1)<CR>
 nnoremap <unique> <C-F4> :call exUtility#Kwbd(1)<CR>
 
+" register buffer names of plugins.
+let g:ex_plugin_registered_bufnames = ["-MiniBufExplorer-","__Tag_List__","\[Lookup File\]", "\[BufExplorer\]"] 
+
+" register filetypes of plugins.
+let g:ex_plugin_registered_filetypes = ["ex_plugin","ex_project","taglist","nerdtree"] 
+
+" default languages
+let g:ex_default_langs = ['c', 'cpp', 'c#', 'javascript', 'java', 'shader', 'python', 'lua', 'vim', 'uc', 'matlab', 'wiki', 'ini', 'make', 'sh', 'batch', 'debug', 'qt', 'swig' ] 
+
+" exEnvironmentSetting post update
+" NOTE: this is a post update environment function used for any custom environment update 
+function g:exES_PostUpdate()
+
+    " set lookup file plugin variables
+	if exists( 'g:exES_LookupFileTag' )
+        let g:LookupFile_TagExpr='"'.g:exES_LookupFileTag.'"./tags"''
+        if exists(':LUCurFile')
+            " NOTE: the second <CR>, if only one file, will jump to it directly.
+            unmap gf
+            nnoremap <unique> <silent> gf :LUCurFile<CR>
+        endif
+    endif
+
+	" set visual_studio plugin variables
+	if exists( 'g:exES_vsTaskList' )
+		let g:visual_studio_task_list = g:exES_vsTaskList
+	endif
+	if exists( 'g:exES_vsOutput' )
+		let g:visual_studio_output = g:exES_vsOutput
+	endif
+	if exists( 'g:exES_vsFindResult1' )
+		let g:visual_studio_find_results_1 = g:exES_vsFindResult1
+	endif
+	if exists( 'g:exES_vsFindResult2' )
+		let g:visual_studio_find_results_2 = g:exES_vsFindResult2
+	endif
+
+    " set vimwiki
+    if exists(:q 'g:exES_wikiHome' )
+        " clear the list first
+        if exists( 'g:vimwiki_list' ) && !empty(g:vimwiki_list)
+            silent call remove( g:vimwiki_list, 0, len(g:vimwiki_list)-1 )
+        endif
+
+        " assign vimwiki pathes, 
+        " NOTE: vimwiki need full path.
+        let g:vimwiki_list = [ { 'path': fnamemodify(g:exES_wikiHome,":p"), 
+                    \ 'path_html': fnamemodify(g:exES_wikiHomeHtml,":p"),
+                    \ 'html_header': fnamemodify(g:exES_wikiHtmlHeader,":p") } ]
+
+        " create vimwiki files
+        call exUtility#CreateVimwikiFiles ()
+    endif
+endfunction
+
+
 " ------------------------------------------------------------------ 
 " Desc: TagList
 " ------------------------------------------------------------------ 
@@ -628,12 +684,12 @@ let g:EnhCommentifyBindInVisual = 'no'
 let g:EnhCommentifyBindInInsert = 'no'
 
 " NOTE: VisualComment,Comment,DeComment are plugin mapping(start with <Plug>), so can't use remap here
-vmap <unique> <F11> <Plug>VisualComment
-nmap <unique> <F11> <Plug>Comment
-imap <unique> <F11> <ESC><Plug>Comment
-vmap <unique> <C-F11> <Plug>VisualDeComment
-nmap <unique> <C-F11> <Plug>DeComment
-imap <unique> <C-F11> <ESC><Plug>DeComment
+"vmap <unique> <F11> <Plug>VisualComment
+"nmap <unique> <F11> <Plug>Comment
+"imap <unique> <F11> <ESC><Plug>Comment
+"vmap <unique> <C-F11> <Plug>VisualDeComment
+"nmap <unique> <C-F11> <Plug>DeComment
+"imap <unique> <C-F11> <ESC><Plug>DeComment
 
 " ------------------------------------------------------------------ 
 " Desc: exCscope

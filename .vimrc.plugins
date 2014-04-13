@@ -277,6 +277,13 @@ Plugin 'groenewege/vim-less'
 Plugin 'plasticboy/vim-markdown'
 let g:vim_markdown_initial_foldlevel=9999
 
+
+"Yunxi add 
+Plugin 'vim-scripts/taglist.vim'
+Plugin 'vim-scripts/lookupfile'
+Plugin 'vim-scripts/genutils'
+"Yunxi end
+
 "}}}
 
 " TEST {{{
@@ -288,3 +295,6 @@ let g:vim_markdown_initial_foldlevel=9999
 "}}}
 
 " vim:ts=4:sw=4:sts=4 et fdm=marker:
+
+
+

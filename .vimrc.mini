@@ -60,6 +60,7 @@ Plugin 'plasticboy/vim-markdown'
 "Yunxi add 
 Plugin 'vim-scripts/taglist.vim'
 Plugin 'vim-scripts/lookupfile'
+Plugin 'vim-scripts/genutils'
 "Yunxi end
 
 " =======================================================
