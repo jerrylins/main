@@ -98,7 +98,8 @@ endif
 
 filetype plugin indent on " required
 syntax on " required
-colorscheme solarized
+"colorscheme solarized
+"silent exec "colorscheme desertEx"
 " colorscheme exlightgray
 
 "/////////////////////////////////////////////////////////////////////////////
@@ -475,3 +476,232 @@ if filereadable(expand(vimrc_local_path))
 endif
 
 " vim:ts=4:sw=4:sts=4 et fdm=marker:
+
+"//////////////////// YunxiZhangy
+
+"@Yunxi color set
+set t_Co=256
+"colorscheme solarized
+silent exec "colorscheme desertEx"
+func! CompileAndDownloaderKernel()
+    exec "w"
+    exec "!dik"
+endfunc
+"map  <F5>: call CompileKernel() <CR>
+"viminfo---------------------------------
+map <F6> :set sessionoptions+=curdir<cr>:set sessionoptions+=buffers<cr> :set sessionoptions+=winsize<cr>  :mksession! mine.vim<cr> :wviminfo! mine.viminfo<cr> :wall<cr> : qall<cr> 
+map <F7> :source ./mine.vim<cr> :rviminfo ./mine.viminfo<cr> <c-j>:q<cr>  
+"----------------------------------------
+map! jk <ESC>   
+let mapleader=","
+set ignorecase
+set shortmess+=T  "dont display 'xxxxx Press ENTER or type command to continuer'
+"double cr disable return messages
+nnoremap <unique> <leader>df :call CompileAndDownloaderKernel()<CR><CR> 
+"--------------------------------- yunxi------------------
+""""""""""""""""""""""window 
+nnoremap <c-j> <c-w>j
+nnoremap <c-k> <c-w>k
+nnoremap <c-h> <c-w>h
+nnoremap <c-l> <c-w>l
+
+nnoremap <c-d> <c-w>+
+nnoremap <c-g> <c-w>-
+nnoremap <c-p> <c-w><
+nnoremap <c-n> <c-w>>
+
+func Enter()
+endfunc
+set cscopequickfix=s-,c-,d-,i-,t-,e-
+if has("cscope")
+    set csprg=/usr/bin/cscope
+    set csto=0
+    set cst
+    set csverb
+	set cspc=3
+    "add any database in current dir
+   if filereadable("cscope.out")
+    silent cs add cscope.out
+    "else search cscope.out elsewhere
+   else
+      let cscope_file=findfile("cscope.out", ".;")
+      let cscope_pre=matchstr(cscope_file, ".*/")
+      if !empty(cscope_file) && filereadable(cscope_file)
+        exe  " silent cs add" cscope_file cscope_pre
+        
+      endif      
+   endif
+end
+nmap <C-\>s :cs find s <C-R>=expand("<cword>")<CR><CR>
+nmap <C-\>g :cs find g <C-R>=expand("<cword>")<CR><CR>
+nmap <C-\>c :cs find c <C-R>=expand("<cword>")<CR><CR>
+nmap <C-\>t :cs find t <C-R>=expand("<cword>")<CR><CR>
+nmap <C-\>e :cs find e <C-R>=expand("<cword>")<CR><CR>
+nmap <C-\>f :cs find f <C-R>=expand("<cfile>")<CR><CR>
+nmap <C-\>i :cs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
+nmap <C-\>d :cs find d <C-R>=expand("<cword>")<CR><CR>
+
+
+nmap <silent> <tab> :bn!<CR>
+nmap <silent> <s-tab> :bp!<CR>
+" map exUtility#Kwbd(1) to \bd will close buffer and keep window
+nnoremap <unique> <Leader>bd :call exUtility#Kwbd(1)<CR>
+nnoremap <unique> <C-F4> :call exUtility#Kwbd(1)<CR>
+
+" ------------------------------------------------------------------ 
+" Desc: TagList
+" ------------------------------------------------------------------ 
+
+" F4:  Switch on/off TagList
+nnoremap <unique> <silent> <F4> :TlistToggle<CR>
+"let Tlist_Ctags_Cmd = $VIM.'/vimfiles/ctags.exe' " location of ctags tool 
+let Tlist_Show_One_File = 1 " Displaying tags for only one file~
+let Tlist_Exist_OnlyWindow = 1 " if you are the last, kill yourself 
+let Tlist_Use_Right_Window = 1 " split to the right side of the screen 
+let Tlist_Sort_Type = "order" " sort by order or name
+let Tlist_Display_Prototype = 0 " do not show prototypes and not tags in the taglist window.
+let Tlist_Compart_Format = 1 " Remove extra information and blank lines from the taglist window.
+let Tlist_GainFocus_On_ToggleOpen = 1 " Jump to taglist window on open.
+let Tlist_Display_Tag_Scope = 1 " Show tag scope next to the tag name.
+let Tlist_Close_On_Select = 0 " Close the taglist window when a file or tag is selected.
+let Tlist_BackToEditBuffer = 0 " If no close on select, let the user choose back to edit buffer or not
+let Tlist_Enable_Fold_Column = 0 " Don't Show the fold indicator column in the taglist window.
+let Tlist_WinWidth = 40
+let Tlist_Compact_Format = 1 " do not show help
+" let Tlist_Ctags_Cmd = 'ctags --c++-kinds=+p --fields=+iaS --extra=+q --languages=c++'
+" very slow, so I disable this
+" let Tlist_Process_File_Always = 1 " To use the :TlistShowTag and the :TlistShowPrototype commands without the taglist window and the taglist menu, you should set this variable to 1.
+":TlistShowPrototype [filename] [linenumber]
+
+" let taglist support shader language as c-like language
+let tlist_hlsl_settings = 'c;d:macro;g:enum;s:struct;u:union;t:typedef;v:variable;f:function'
+
+" ------------------------------------------------------------------ 
+" Desc: ShowMarks
+" ------------------------------------------------------------------ 
+
+let g:showmarks_enable = 1
+let showmarks_include = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+" Ignore help, quickfix, non-modifiable buffers
+let showmarks_ignore_type = "hqm"
+" Hilight lower & upper marks
+let showmarks_hlline_lower = 1
+let showmarks_hlline_upper = 0 
+
+" quick remove mark
+" nmap <F9> \mh
+
+" ------------------------------------------------------------------ 
+" Desc: LookupFile 
+" ------------------------------------------------------------------ 
+
+if has("gui_running") "  the <alt> key is only available in gui mode.
+    if has ("mac")
+        nnoremap <unique> ˆ :LUTags<CR>
+    else
+        nnoremap <unique> <M-I> :LUTags<CR>
+    endif
+endif
+nnoremap <unique> <leader>fs :LUTags<CR><CR>
+nnoremap <unique> <leader>b :LUBufs<CR>
+nnoremap <unique> <silent> <Leader>ll :LUCurWord<CR>
+
+let g:LookupFile_TagExpr = '"filenametags"'
+let g:LookupFile_MinPatLength = 3
+let g:LookupFile_PreservePatternHistory = 0
+let g:LookupFile_PreserveLastPattern = 0
+let g:LookupFile_AllowNewFiles = 0
+let g:LookupFile_smartcase = 1
+let g:LookupFile_EscCancelsPopup = 1
+
+" ------------------------------------------------------------------ 
+" Desc: EnhCommentify
+" ------------------------------------------------------------------ 
+
+let g:EnhCommentifyFirstLineMode='yes'
+let g:EnhCommentifyRespectIndent='yes'
+let g:EnhCommentifyUseBlockIndent='yes'
+let g:EnhCommentifyAlignRight = 'yes'
+let g:EnhCommentifyPretty = 'yes'
+let g:EnhCommentifyBindInNormal = 'no'
+let g:EnhCommentifyBindInVisual = 'no'
+let g:EnhCommentifyBindInInsert = 'no'
+
+" NOTE: VisualComment,Comment,DeComment are plugin mapping(start with <Plug>), so can't use remap here
+vmap <unique> <F11> <Plug>VisualComment
+nmap <unique> <F11> <Plug>Comment
+imap <unique> <F11> <ESC><Plug>Comment
+vmap <unique> <C-F11> <Plug>VisualDeComment
+nmap <unique> <C-F11> <Plug>DeComment
+imap <unique> <C-F11> <ESC><Plug>DeComment
+
+" ------------------------------------------------------------------ 
+" Desc: exCscope
+" ------------------------------------------------------------------ 
+
+nnoremap <unique> <silent> <F2> :CSIC<CR>
+nnoremap <unique> <silent> <Leader>ci :CSID<CR>
+nnoremap <unique> <silent> <F3> :ExcsParseFunction<CR>
+nnoremap <unique> <silent> <Leader>cd :CSDD<CR>
+nnoremap <unique> <silent> <Leader>cc :CSCD<CR>
+nnoremap <unique> <silent> <Leader>cs :ExcsSelectToggle<CR>
+nnoremap <unique> <silent> <Leader>cq :ExcsQuickViewToggle<CR>
+
+let g:exCS_backto_editbuf = 0
+let g:exCS_close_when_selected = 0
+let g:exCS_window_direction = 'bel'
+let g:exCS_window_width = 48
+
+" ------------------------------------------------------------------ 
+" Desc: exQuickFix
+" ------------------------------------------------------------------ 
+
+nnoremap <unique> <silent> <leader>qf :ExqfSelectToggle<CR>
+nnoremap <unique> <silent> <leader>qq :ExqfQuickViewToggle<CR>
+
+let g:exQF_backto_editbuf = 0
+let g:exQF_close_when_selected = 0
+let g:exQF_window_direction = 'bel'
+
+" copy only full path name
+nnoremap <unique> <silent> <leader>y1 :call exUtility#Yank( fnamemodify(bufname('%'),":p:h") )<CR>
+" copy only file name
+nnoremap <unique> <silent> <leader>y2 :call exUtility#Yank( fnamemodify(bufname('%'),":p:t") )<CR>
+" copy full path + filename
+nnoremap <unique> <silent> <leader>y3 :call exUtility#Yank( fnamemodify(bufname('%'),":p") )<CR>
+" copy path + filename for code
+nnoremap <unique> <silent> <leader>yb :call exUtility#YankBufferNameForCode()<CR>
+" copy path for code
+nnoremap <unique> <silent> <leader>yp :call exUtility#YankFilePathForCode()<CR>
+
+" ------------------------------------------------------------------ 
+" Desc: exTagSelect
+" ------------------------------------------------------------------ 
+
+nnoremap <unique> <silent> <Leader>ts :ExtsSelectToggle<CR>
+nnoremap <unique> <silent> <Leader>tg :ExtsGoDirectly<CR>
+nnoremap <unique> <silent> <Leader>] :ExtsGoDirectly<CR>
+
+let g:exTS_backto_editbuf = 0
+let g:exTS_close_when_selected = 1
+let g:exTS_window_direction = 'bel'
+
+" ------------------------------------------------------------------ 
+" Desc: exGlobalSearch
+" ------------------------------------------------------------------ 
+
+nnoremap <unique> <silent> <Leader>gs :ExgsSelectToggle<CR>
+nnoremap <unique> <silent> <Leader>gq :ExgsQuickViewToggle<CR>
+nnoremap <unique> <silent> <Leader>gg :ExgsGoDirectly<CR>
+nnoremap <unique> <silent> <Leader>n :ExgsGotoNextResult<CR>
+nnoremap <unique> <silent> <Leader>N :ExgsGotoPrevResult<CR>
+nnoremap <unique> <Leader><S-f> :GS 
+
+let g:exGS_backto_editbuf = 0
+let g:exGS_close_when_selected = 0
+let g:exGS_window_direction = 'bel'
+let g:exGS_auto_sort = 1
+let g:exGS_lines_for_autosort = 200
+
+"--------------------------------- yunxi------------------
+"////////////////////end YunxiZhangy

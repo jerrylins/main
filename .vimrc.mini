@@ -57,6 +57,11 @@ Plugin 'groenewege/vim-less'
 Plugin 'plasticboy/vim-markdown'
 " Plugin 'exvim/test-loading'
 
+"Yunxi add 
+Plugin 'vim-scripts/taglist.vim'
+Plugin 'vim-scripts/lookupfile'
+"Yunxi end
+
 " =======================================================
 
 filetype plugin indent on " required
