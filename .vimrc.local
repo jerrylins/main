@@ -1,2 +1,97 @@
 " This file will be loaded at the end of .vimrc.
 " This file is designed to add your own vim scripts or override the exVim's .vimrc settings.
+"//////////////////// YunxiZhangy
+
+"@Yunxi color set
+set t_Co=256
+"colorscheme solarized
+silent exec "colorscheme desertEx"
+
+let g:airline_theme="bubblegum"
+
+" make kernel
+func! CompileAndDownloaderKernel()
+    exec "w"
+    exec "!dik"
+endfunc
+
+nnoremap <unique> <leader>df :call CompileAndDownloaderKernel()<CR><CR> 
+
+"map  <F5>: call CompileKernel() <CR>
+"viminfo---------------------------------
+map <F6> :set sessionoptions+=curdir<cr>:set sessionoptions+=buffers<cr> :set sessionoptions+=winsize<cr>  :mksession! mine.vim<cr> :wviminfo! mine.viminfo<cr> :wall<cr> : qall<cr> 
+map <F7> :source ./mine.vim<cr> :rviminfo ./mine.viminfo<cr> <c-j>:q<cr>  
+"----------------------------------------
+map! jk <ESC>   
+let mapleader=","
+set ignorecase
+set shortmess+=T  "dont display 'xxxxx Press ENTER or type command to continuer'
+"double cr disable return messages
+"--------------------------------- yunxi------------------
+""""""""""""""""""""""window 
+nnoremap <c-j> <c-w>j
+nnoremap <c-k> <c-w>k
+nnoremap <c-h> <c-w>h
+nnoremap <c-l> <c-w>l
+
+nnoremap <c-d> <c-w>+
+nnoremap <c-g> <c-w>-
+nnoremap <c-p> <c-w><
+nnoremap <c-n> <c-w>>
+
+func Enter()
+endfunc
+set cscopequickfix=s-,c-,d-,i-,t-,e-
+if has("cscope")
+    set csprg=/usr/bin/cscope
+    set csto=0
+    set cst
+    set csverb
+	set cspc=3
+    "add any database in current dir
+   if filereadable("cscope.out")
+    silent cs add cscope.out
+    "else search cscope.out elsewhere
+   else
+      let cscope_file=findfile("cscope.out", ".;")
+      let cscope_pre=matchstr(cscope_file, ".*/")
+      if !empty(cscope_file) && filereadable(cscope_file)
+        exe  " silent cs add" cscope_file cscope_pre
+        
+      endif      
+   endif
+end
+nmap <C-\>s :cs find s <C-R>=expand("<cword>")<CR><CR>
+nmap <C-\>g :cs find g <C-R>=expand("<cword>")<CR><CR>
+nmap <C-\>c :cs find c <C-R>=expand("<cword>")<CR><CR>
+nmap <C-\>t :cs find t <C-R>=expand("<cword>")<CR><CR>
+nmap <C-\>e :cs find e <C-R>=expand("<cword>")<CR><CR>
+nmap <C-\>f :cs find f <C-R>=expand("<cfile>")<CR><CR>
+nmap <C-\>i :cs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
+nmap <C-\>d :cs find d <C-R>=expand("<cword>")<CR><CR>
+
+
+nmap <silent> <tab> :bn!<CR>
+nmap <silent> <s-tab> :bp!<CR>
+" map exUtility#Kwbd(1) to \bd will close buffer and keep window
+nnoremap <unique> <Leader>bd :call exUtility#Kwbd(1)<CR>
+nnoremap <unique> <C-F4> :call exUtility#Kwbd(1)<CR>
+
+" ctrlp setting
+  let g:ctrlp_map = '<c-p>'
+  let g:ctrlp_cmd = 'CtrlP'
+"  let g:loaded_ctrlp = 1
+  let g:ctrlp_by_filename = 1
+  let g:ctrlp_regexp = 0
+  let g:ctrlp_match_window = 'top,order:ttb,min:1,max:20,results:20'
+"  let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
+  let g:ctrlp_custom_ignore = '\v[\/](Documentation)$'
+  let g:ctrlp_switch_buffer = 'Et'
+  let g:ctrlp_working_path_mode = './'
+"  let g:ctrlp_use_caching = 1
+"  let g:ctrlp_cache_dir = $HOME.'/.cache/ctrlp'
+  let g:ctrlp_max_files = 10000
+  let g:ctrlp_max_depth = 400
+  let g:ctrlp_mruf_relative = 1
+ let g:ctrlp_user_command = 'find %s -type f'        " MacOSX/Linux
+ " let g:ctrlp_user_command = 'cat cscope.files'        " MacOSX/Linux
