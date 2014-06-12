@@ -22,10 +22,11 @@ nnoremap <unique> <leader>df :call CompileAndDownloaderKernel()<CR><CR>
 map <F6> :set sessionoptions+=curdir<cr>:set sessionoptions+=buffers<cr> :set sessionoptions+=winsize<cr>  :mksession! mine.vim<cr> :wviminfo! mine.viminfo<cr> :wall<cr> : qall<cr> 
 map <F7> :source ./mine.vim<cr> :rviminfo ./mine.viminfo<cr> <c-j>:q<cr>  
 "----------------------------------------
-map! jk <ESC>   
+imap hh <ESC>   
 let mapleader=","
 set ignorecase
 set shortmess+=T  "dont display 'xxxxx Press ENTER or type command to continuer'
+set mouse=v
 "double cr disable return messages
 "--------------------------------- yunxi------------------
 """"""""""""""""""""""window 
@@ -78,6 +79,24 @@ nnoremap <unique> <Leader>bd :call exUtility#Kwbd(1)<CR>
 nnoremap <unique> <C-F4> :call exUtility#Kwbd(1)<CR>
 "open a file from file list of document
 nmap <unique> <leader>f <ESC>^y$:badd <C-r>0<cr>
+
+    " ======================================================== 
+    " ShowMarks
+    " ======================================================== 
+
+    " For marks a-z
+    hi clear ShowMarksHLl
+    hi ShowMarksHLl term=bold cterm=none ctermbg=none gui=none guibg=LightBlue
+    " For marks A-Z
+    hi clear ShowMarksHLu
+    hi ShowMarksHLu term=bold cterm=bold ctermbg=LightRed ctermfg=DarkRed gui=bold guibg=LightRed guifg=DarkRed
+    " For all other marks
+    hi clear ShowMarksHLo
+    hi ShowMarksHLo term=bold cterm=bold ctermbg=LightYellow ctermfg=DarkYellow gui=bold guibg=LightYellow guifg=DarkYellow
+    " For multiple marks on the same line.
+    hi clear ShowMarksHLm
+    hi ShowMarksHLm term=bold cterm=none ctermbg=LightBlue gui=none guibg=SlateBlue
+
 
 " ctrlp setting
   let g:ctrlp_map = '<c-p>'
