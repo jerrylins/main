@@ -80,6 +80,9 @@ nnoremap <unique> <C-F4> :call exUtility#Kwbd(1)<CR>
 "open a file from file list of document
 nmap <unique> <leader>f <ESC>^y$:badd <C-r>0<cr>
 
+"cat android kernel messages for debug
+nnoremap <unique> <leader>gk <ESC>:n /tmp/klog<cr><cr>:r !adb shell dmesg<cr> :w<cr>
+
     " ======================================================== 
     " ShowMarks
     " ======================================================== 
