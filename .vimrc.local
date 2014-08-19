@@ -81,7 +81,7 @@ nnoremap <unique> <C-F4> :call exUtility#Kwbd(1)<CR>
 nmap <unique> <leader>f <ESC>^y$:badd <C-r>0<cr>
 
 "cat android kernel messages for debug
-nnoremap <unique> <leader>gk <ESC>:n /tmp/klog<cr><cr>:r !adb shell dmesg<cr> :w<cr>
+nnoremap <unique> <leader>gk <ESC>:n /tmp/klog<cr>:r !adb shell dmesg<cr>:w<cr>
 
     " ======================================================== 
     " ShowMarks
@@ -119,3 +119,8 @@ nnoremap <unique> <leader>gk <ESC>:n /tmp/klog<cr><cr>:r !adb shell dmesg<cr> :w
   let g:ctrlp_mruf_relative = 1
  let g:ctrlp_user_command = 'find %s -type f'        " MacOSX/Linux
  " let g:ctrlp_user_command = 'cat cscope.files'        " MacOSX/Linux
+
+ " disable Background Color Erase (BCE) so that color schemes
+ " render properly when inside 256-color tmux and GNU screen.
+ " see also http://snk.tuxfamily.org/log/vim-256color-bce.html
+ set t_ut=
