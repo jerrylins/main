@@ -124,3 +124,6 @@ nnoremap <unique> <leader>gk <ESC>:n /tmp/klog<cr>:r !adb shell dmesg<cr>:w<cr>
  " render properly when inside 256-color tmux and GNU screen.
  " see also http://snk.tuxfamily.org/log/vim-256color-bce.html
  set t_ut=
+ " set colorscheme when plugin use vimdiff such as fugitive.vim 
+ " it will looks good.
+ au FilterWritePre * if &diff | set t_Co=256 | set bg=dark | colorscheme desertEx| endif 
