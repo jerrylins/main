@@ -2,6 +2,12 @@
 " This file is designed to add your own vim scripts or override the exVim's .vimrc settings.
 "//////////////////// YunxiZhangy
 
+augroup ex_gui_font
+        " check and determine the gui font after GUIEnter. 
+        " NOTE: getfontname function only works after GUIEnter.  
+        au!
+        set guifont=Ubuntu\ Mono\ 12 
+augroup END
 "@Yunxi color set
 set t_Co=256
 "colorscheme solarized
