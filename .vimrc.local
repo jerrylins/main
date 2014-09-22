@@ -49,25 +49,25 @@ nnoremap <c-n> <c-w>>
 func Enter()
 endfunc
 set cscopequickfix=s-,c-,d-,i-,t-,e-
-if has("cscope")
-    set csprg=/usr/bin/cscope
-    set csto=0
-    set cst
-    set csverb
-	set cspc=3
-    "add any database in current dir
-   if filereadable("cscope.out")
-    silent cs add cscope.out
-    "else search cscope.out elsewhere
-   else
-      let cscope_file=findfile("cscope.out", ".;")
-      let cscope_pre=matchstr(cscope_file, ".*/")
-      if !empty(cscope_file) && filereadable(cscope_file)
-        exe  " silent cs add" cscope_file cscope_pre
-        
-      endif      
-   endif
-end
+"if has("cscope")
+"    set csprg=/usr/bin/cscope
+"    set csto=0
+"    set cst
+"    set csverb
+"	set cspc=3
+"    "add any database in current dir
+"   if filereadable("cscope.out")
+"    silent cs add cscope.out
+"    "else search cscope.out elsewhere
+"   else
+"      let cscope_file=findfile("cscope.out", ".;")
+"      let cscope_pre=matchstr(cscope_file, ".*/")
+"      if !empty(cscope_file) && filereadable(cscope_file)
+"        exe  " silent cs add" cscope_file cscope_pre
+"        
+"      endif      
+"   endif
+"end
 nmap <C-\>s :cs find s <C-R>=expand("<cword>")<CR><CR>
 nmap <C-\>g :cs find g <C-R>=expand("<cword>")<CR><CR>
 nmap <C-\>c :cs find c <C-R>=expand("<cword>")<CR><CR>
@@ -77,6 +77,14 @@ nmap <C-\>f :cs find f <C-R>=expand("<cfile>")<CR><CR>
 nmap <C-\>i :cs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
 nmap <C-\>d :cs find d <C-R>=expand("<cword>")<CR><CR>
 
+set csprg=gtags-cscope
+cscope add ./GTAGS
+
+nnoremap <leader>gg :execute 'gtags -x '.expand('<cword>')<CR>
+nnoremap <leader>gc :execute 'gtags -c'<CR>
+nnoremap <leader>gr :execute 'gtags/ref'<CR>
+nnoremap <leader>ge :execute 'gtags/grep'<CR>
+vnoremap <leader>gg <ESC>:execute 'Unite gtags/def:'.GetVisualSelection()<CR>
 
 nmap <silent> <tab> :bn!<CR>
 nmap <silent> <s-tab> :bp!<CR>
@@ -87,7 +95,7 @@ nnoremap <unique> <C-F4> :call exUtility#Kwbd(1)<CR>
 nmap <unique> <leader>f <ESC>^y$:badd <C-r>0<cr>
 
 "cat android kernel messages for debug
-nnoremap <unique> <leader>gk <ESC>:n /tmp/klog<cr>:r !adb shell dmesg<cr>:w<cr>
+nnoremap <unique> <leader>gk <ESC>:n /tmp/klog<cr>:!adb shell dmesg >/tmp/klog <cr>
 
     " ======================================================== 
     " ShowMarks
