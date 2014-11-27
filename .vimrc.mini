@@ -60,7 +60,7 @@ Plugin 'groenewege/vim-less'
 Plugin 'wavded/vim-stylus'
 Plugin 'plasticboy/vim-markdown'
 " Plugin 'exvim/test-loading'
-
+Plugin 'vivien/vim-addon-linux-coding-style'
 " =======================================================
 
 filetype plugin indent on " required
