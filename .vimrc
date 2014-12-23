@@ -77,6 +77,9 @@ scriptencoding utf-8
 
 filetype off " required
 
+" set mapleader here otherwise someplugin will use 
+" "\" as mapleader default.
+let mapleader=","
 " load .vimrc.plugins and .vimrc.plugins.local
 let vimrc_plugins_path = '~/.vimrc.plugins'
 let vimrc_plugins_local_path = '~/.vimrc.plugins.local'
