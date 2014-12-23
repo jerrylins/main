@@ -89,7 +89,7 @@ cscope add ./GTAGS
 nmap <silent> <tab> :bn!<CR>
 nmap <silent> <s-tab> :bp!<CR>
 " map exUtility#Kwbd(1) to \bd will close buffer and keep window
-nnoremap <unique> <Leader>bd :call exUtility#Kwbd(1)<CR>
+" nnoremap <unique> <Leader>bd :call exUtility#Kwbd(1)<CR>
 nnoremap <unique> <C-F4> :call exUtility#Kwbd(1)<CR>
 "open a file from file list of document
 nmap <unique> <leader>f <ESC>^y$:badd <C-r>0<cr>
