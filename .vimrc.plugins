@@ -375,15 +375,16 @@ endfunction
 
 " vim-easymotion: invoke by <leader><leader> w,b,e,ge,f,F,h,i,j,k,/ 
 " ---------------------------------------------------
-" Plugin 'Lokaltog/vim-easymotion'
+Plugin 'Lokaltog/vim-easymotion'
 
 map <leader><leader>/ <Plug>(easymotion-sn)
 omap <leader><leader>/ <Plug>(easymotion-tn)
-map <leader><leader>j <Plug>(easymotion-j)
-map <leader><leader>k <Plug>(easymotion-k)
-map <leader><leader>l <Plug>(easymotion-lineforward)
-map <leader><leader>h <Plug>(easymotion-linebackward)
+map <leader>j <Plug>(easymotion-j)
+map <leader>k <Plug>(easymotion-k)
+map <leader>l <Plug>(easymotion-lineforward)
+map <leader>h <Plug>(easymotion-linebackward)
 let g:EasyMotion_startofline = 0 " keep cursor colum when JK motion
+map <Leader> <Plug>(easymotion-prefix)
 "}}}
 
 " DISABLE: I'm using GistBox https://app.gistboxapp.com/ instead
