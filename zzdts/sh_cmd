@@ -1,0 +1,5 @@
+
+use pigz to compress file
+$ tar -I pipz -cf OUTPUT_FILE.tar.gz paths_to_archive
+$ tar --use-compress-program=pigz -cf OUTPUT_FILE.tar.gz paths_to_archive
+$ tar cvf - paths-to-archive | pigz -9 -p 32 > archive.tar.gz
