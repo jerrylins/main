@@ -227,7 +227,7 @@ let g:showmarks_hlline_upper = 0
 
 " ex-colorschemes
 " ---------------------------------------------------
-" Plugin 'exvim/ex-colorschemes'
+Plugin 'exvim/ex-colorschemes'
 
 " vim-color-solarized
 " ---------------------------------------------------
